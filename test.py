@@ -10,5 +10,5 @@ def index():
    else:
       sclient += request.environ['HTTP_X_FORWARDED_FOR'] # if behind a proxy
    sclient += f';Platform:{user_agent.platform};Browser:{user_agent.browser}'
-   return sclient
-#    return render_template('index.html', client_request=sclient)
+#    return sclient
+   return render_template('index.html', client_request=sclient)
