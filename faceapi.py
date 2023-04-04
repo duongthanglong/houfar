@@ -14,7 +14,7 @@ path2userdata = app.root_path+'/userdata'
 os.makedirs(path2userdata,exist_ok=True)
 path2userhistory = app.root_path+'/userhistory'
 os.makedirs(path2userhistory,exist_ok=True)
-app_hosting = "https://duongthanglong.pythonanywhere.com" if os.getcwd().endswith('mysite') else "http://localhost:5000"
+app_hosting = "https://houfar.onrender.com" if os.getcwd().endswith('mysite') else "http://localhost:5000"
 
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
@@ -49,7 +49,7 @@ def index():
       sclient += request.environ['REMOTE_ADDR']
    else:
       sclient += request.environ['HTTP_X_FORWARDED_FOR'] # if behind a proxy
-   sclient += f';Platform:{user_agent.platform};Browser:{user_agent.browser}'
+   sclient += f';Platform:{user_agent.platform};Browser:{user_agent.browser};os.getcwd()={os.getcwd()}'
    return render_template('index.html', client_request=sclient)
 #------------------------------------------------------------#
 @app.route('/face-monitoring/', methods=['GET','POST']) #---> GET là để mở dịch vụ; POST là để cập nhật trạng thái học tập
