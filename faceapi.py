@@ -12,7 +12,7 @@ usersdata = None
 usershistory = {} #total of current session & the last history by users
 path2userdata = app.root_path+'/userdata'
 path2userhistory = app.root_path+'/userhistory'
-app_hosting = "https://houfar.onrender.com" if curpath.endswith('render/project/src') else "http://localhost:5000"
+app_hosting = "https://houfar.onrender.com" if os.getcwd().endswith('render/project/src') else "http://localhost:5000"
 
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
