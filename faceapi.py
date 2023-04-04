@@ -11,7 +11,9 @@ SENDBACK_ALLOWCODE = 'moet@hou@fit'
 usersdata = None
 usershistory = {} #total of current session & the last history by users
 path2userdata = app.root_path+'/userdata'
+os.makedirs(path2userdata,exist_ok=True)
 path2userhistory = app.root_path+'/userhistory'
+os.makedirs(path2userhistory,exist_ok=True)
 app_hosting = "https://duongthanglong.pythonanywhere.com" if os.getcwd().endswith('mysite') else "http://localhost:5000"
 
 mail_settings = {
