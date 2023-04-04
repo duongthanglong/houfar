@@ -13,7 +13,7 @@ function createFaceDisplay(){
 
 /*--- start/top the displaying FACE from user's CAMERA ---*/
 function toglleFaceDisplay( userid="", videowidth=320, videoheight=240, facebox=1, facelandmark=0, faceexpression=0, facerecognition=0, requiringcode="", soundnotify="", forceShow=false ) {
-  const url_facemonitoring = (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+ '/face-monitoring/'
+  const url_facemonitoring = (window.location.origin.includes('localhost')?window.location.origin:'https://houfar.onrender.com')+ '/face-monitoring/'
   const facedisplay = $('#div_FaceDisplay').get(0)
   if (facedisplay==null || facedisplay==undefined){
     alert('The FaceDisplay is NOT created on current page!')
