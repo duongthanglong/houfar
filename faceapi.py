@@ -35,7 +35,7 @@ def favicon():
 @app.route('/filesprocess', methods=['GET','POST'])
 def filesprocess():
    if request.method=='GET':
-      return render_template('filesprocess.html')
+      return render_template('filesprocess.html', app_hosting=app_hosting)
    # elif request.method=='POST':
       
 #------------------------------------------------------------#
@@ -48,7 +48,7 @@ def index():
    else:
       sclient += request.environ['HTTP_X_FORWARDED_FOR'] # if behind a proxy
    sclient += f';Platform: {user_agent.platform};Browser: {user_agent.browser}'
-   return render_template('index.html', client_request=sclient)
+   return render_template('index.html', app_hosting=app_hosting, client_request=sclient)
 #------------------------------------------------------------#
 @app.route('/face-monitoring/', methods=['GET','POST']) #---> GET là để mở dịch vụ; POST là để cập nhật trạng thái học tập
 def face_monitoring():
@@ -71,14 +71,14 @@ def face_monitoring():
       # print('*'*20,'USERS:'+data['userid'] if data is not None else 'NO.USERS')
       if data is not None: #monitor face with USER (default: requiringcode=='hou@moet', or 'fit@hou@moet' -> allow_sendback history)
          usershistory[data['userid']] = {'total':None,'last':None}
-         return render_template('face-monitoring.html', videowidth=videowidth, videoheight=videoheight, 
+         return render_template('face-monitoring.html', app_hosting=app_hosting, videowidth=videowidth, videoheight=videoheight, 
             userid=data['userid'], descriptors=data['descriptors'], 
             sendback_allowcode=data['sendback_allowcode'],
             facebox=facebox, facelandmark=facelandmark, 
             faceexpression=faceexpression, facerecognition=facerecognition, 
             soundnotify=soundnotify)
       else: #just view face, NO USER for monitoring ---> data=0
-         return render_template('face-monitoring.html', videowidth=videowidth, videoheight=videoheight, 
+         return render_template('face-monitoring.html', app_hosting=app_hosting, videowidth=videowidth, videoheight=videoheight, 
             facebox=facebox, facelandmark=facelandmark, 
             faceexpression=faceexpression, facerecognition=facerecognition, 
             soundnotify=soundnotify)
@@ -131,7 +131,7 @@ def face_monitoring():
 #------------------------------------------------------------#
 @app.route('/lms-testing/', methods=['GET'])
 def lms_testing():
-   return render_template('lms-testing.html')
+   return render_template('lms-testing.html', app_hosting=app_hosting)
 #------------------------------------------------------------#
 @app.route('/lms-monitoring/', methods=['GET','POST'])
 def lms_monitoring():
@@ -140,7 +140,7 @@ def lms_monitoring():
       usersdata = load_usersdata()
    # print('*'*20,'len(usershistory)=',len(usershistory),usershistory.keys())   
    if request.method=='GET':
-      return render_template('lms-monitoring.html')
+      return render_template('lms-monitoring.html', app_hosting=app_hosting)
    else: #POST ---> send history of users to client
       if 'userid_prefix' in request.form:
          userid_prefix = request.form['userid_prefix']
@@ -158,7 +158,7 @@ def capturing():
       usersdata = load_usersdata()
       # print('*'*20,f'Loading:{len(usersdata)} students')
    if request.method=='GET': #mở dịch vụ đăng ký và chụp ảnh
-      return render_template('capturing.html', num_students=len(usersdata))
+      return render_template('capturing.html', app_hosting=app_hosting,  num_students=len(usersdata))
    else: # request.method=='POST': # ---> login/save images      
       uid = request.form['userid']
       if 'userpass' in request.form: #login
