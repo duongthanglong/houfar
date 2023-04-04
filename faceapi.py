@@ -11,11 +11,8 @@ SENDBACK_ALLOWCODE = 'moet@hou@fit'
 usersdata = None
 usershistory = {} #total of current session & the last history by users
 path2userdata = app.root_path+'/userdata'
-os.makedirs(path2userdata,exist_ok=True)
 path2userhistory = app.root_path+'/userhistory'
-os.makedirs(path2userhistory,exist_ok=True)
-curpath = os.getcwd()
-app_hosting = "https://houfar.onrender.com" if curpath.endswith('mysite') else "http://localhost:5000"
+app_hosting = "https://houfar.onrender.com" if curpath.endswith('render/project/src') else "http://localhost:5000"
 
 mail_settings = {
     "MAIL_SERVER": 'smtp.gmail.com',
