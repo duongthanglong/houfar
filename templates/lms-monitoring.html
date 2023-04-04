@@ -6,11 +6,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript">
     function showMonitoring(){
+      app_hosting = "{{app_hosting}}"
       $('#btn_show').get(0).disabled = true;
       uid_prefix = $('#username').get(0).value;
       $.ajax({
         type: "POST",
-        url: (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+'/lms-monitoring/',
+        url: (window.location.origin.includes('localhost')?window.location.origin:app_hosting)+'/lms-monitoring/',
         data: {'userid_prefix':uid_prefix},
         success: function (response) { 
           // console.log('response history:',response['results'],response['history'])
