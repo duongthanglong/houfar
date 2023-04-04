@@ -116,7 +116,7 @@ function login_user(){
     user_pass = $('#inp_password').get(0).value
     $.ajax({
       type: "POST",
-      url: (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+'/capturing',
+      url: (window.location.origin.includes('localhost')?window.location.origin:'https://houfar.onrender.com')+'/capturing',
       data: {'userid':userid, 'userpass':user_pass},
       success: function (response) {
         if (response['results']){
