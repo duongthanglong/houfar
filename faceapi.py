@@ -47,7 +47,7 @@ def index():
       sclient += request.environ['REMOTE_ADDR']
    else:
       sclient += request.environ['HTTP_X_FORWARDED_FOR'] # if behind a proxy
-   sclient += f';Platform: {user_agent.platform};Browser: {user_agent.browser};os.getcwd(): {curpath}'
+   sclient += f';Platform: {user_agent.platform};Browser: {user_agent.browser}'
    return render_template('index.html', client_request=sclient)
 #------------------------------------------------------------#
 @app.route('/face-monitoring/', methods=['GET','POST']) #---> GET là để mở dịch vụ; POST là để cập nhật trạng thái học tập
