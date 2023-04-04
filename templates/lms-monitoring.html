@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Giám sát học và thi</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    function showMonitoring(){
+      $('#btn_show').get(0).disabled = true;
+      uid_prefix = $('#username').get(0).value;
+      $.ajax({
+        type: "POST",
+        url: (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+'/lms-monitoring/',
+        data: {'userid_prefix':uid_prefix},
+        success: function (response) { 
+          // console.log('response history:',response['results'],response['history'])
+          if (response['results']){ 
+            viewResults(response['history'])
+          }
+        }
+        // error: function (xhr){ console.log('request users history - error from server:',xhr) }
+      });
+      setTimeout(() => showMonitoring(), 1000)
+    }
+    function round(num, prec) {
+      if (prec === void 0) { prec = 1; }
+      let f = Math.pow(10, prec);
+      return Math.floor(num * f) / f;
+    }
+    function viewResults( history ){
+      /*Tạo bảng chứa kết qủa giám sát: mỗi dòng là 1 user, cột đầu là userid, trạng thái gần nhất, lịch sử của ngày*/
+      tblBody = $('#tbl_history').find('tbody')
+      var stt = 0
+      console.log(history)
+      Object.entries(history).forEach(([uid,hist]) => {
+        console.log(uid)
+        if (uid!=""){
+          trRow = tblBody.find("tr:eq("+(stt+2)+")")
+          if (trRow.length==0){
+            trLast = tblBody.find("tr:last")
+            trRow = trLast.clone()
+            trLast.after(trRow);
+          }
+          // hist = history[uid]
+          dtRow = [ stt+1,uid,
+                    hist["last"]["ctime"],hist["last"]["dtime"],
+                    hist["last"]["recognized"],round(hist["last"]["similarity"]*100,2),
+                    hist["last"]["expression"],round(hist["last"]["score"]*100,2),
+                    hist["total"]["count"],hist["total"]["count_nonface"],
+                    round(hist["total"]["similarity"]/hist["total"]["count"]*100,2),
+                    "Cao" in hist["total"]["expressions"]?hist["total"]["expressions"]["Cao"]["count"]+"/"+round(hist["total"]["expressions"]["Cao"]["score"]/hist["total"]["expressions"]["Cao"]["count"]*100,2):"",
+                    "Vừa" in hist["total"]["expressions"]?hist["total"]["expressions"]["Vừa"]["count"]+"/"+round(hist["total"]["expressions"]["Vừa"]["score"]/hist["total"]["expressions"]["Vừa"]["count"]*100,2):"",
+                    "Thấp" in hist["total"]["expressions"]?hist["total"]["expressions"]["Thấp"]["count"]+"/"+round(hist["total"]["expressions"]["Thấp"]["score"]/hist["total"]["expressions"]["Thấp"]["count"]*100,2):""
+                  ]
+          for (var j=0;j<dtRow.length;j++){
+            trRow.find("td:eq("+j+")").text(dtRow[j])            
+          }
+          // console.log('check=',dtRow[4])
+          if (dtRow[4]=='' || hist['last']['similarity']<0.5){
+            trRow.find("td:eq(1)").css({'background-color':'red'})
+          }else{
+            trRow.find("td:eq(1)").css({'background-color':''})
+          }
+          stt += 1
+        }        
+      });
+      // $('#tbl_history').refresh()
+    }
+  </script>
+  <style type="text/css">
+    table, td, th {
+      border: 1px solid black;
+    }
+    th.history{ background: lightgrey;}
+    #tbl_history { border-collapse: collapse;}
+  </style>
+</head>
+
+<body>
+  <label>UserID prefix:</label><input type="text" id="username" size="30" value="duongthanglong">
+  <button id="btn_show" onclick="showMonitoring();">Xem kết quả giám sát</button>
+  <table id="tbl_history">
+    <tr>
+      <th class="history" rowspan="2">Idx</th>
+      <th class="history" rowspan="2">User ID</th>
+      <th class="history" colspan="6">Last activity</th>
+      <th class="history" colspan="6">Total activities</th>
+    </tr>
+    <tr>
+      <th class="history">Time from Client</th>
+      <th class="history">+Delay to Server</th>
+      <th class="history">Recognized Label</th>
+      <th class="history">Similarity</th>
+      <th class="history">Expression</th>
+      <th class="history">Score</th>
+      <th class="history">Count All</th>
+      <th class="history">Count Non-face</th>
+      <th class="history">Average similarity</th>
+      <th class="history">Cao (Cnt,Avg)</th>
+      <th class="history">Vừa (Cnt,Avg)</th>
+      <th class="history">Thấp (Cnt,Avg)</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="text-align:center"></td>
+      <td></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+      <td style="text-align:center"></td>
+    </tr>
+  </table>
+</body>
+</html>

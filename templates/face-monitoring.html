@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Giám sát học & thi</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    /*----- This must be run before [face-api.js] & [face-api-client.js] 
+            to put response parameters from server into attributes of elements for later using -----*/
+    $(document).ready(function() {
+      dpr = $("#div_parameters_responsedata").get(0)
+      dpr.videowidth = "{{videowidth}}";
+      dpr.videoheight = "{{videoheight}}";
+      dpr.facebox = "{{facebox}}";
+      dpr.facelandmark = "{{facelandmark}}";
+      dpr.faceexpression = "{{faceexpression}}";
+      dpr.facerecognition = "{{facerecognition}}";
+      dpr.soundnotify = "{{soundnotify}}";
+      // const data = {{data}}; //data response from server to recognition students, =0 if no students 
+      dpr.responsedata = 
+          { userid:"{{userid}}",
+            // imagefiles:"{{imagefiles}}",
+            descriptors:"{{descriptors}}",
+            sendback_allowcode:"{{sendback_allowcode}}"
+          }
+    })
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='face-api.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='face-api-client.js') }}"></script>
+  <style type="text/css">
+    #overlay, .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #inputVideo {
+      transform: rotateY(180deg);
+      -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+      -moz-transform:rotateY(180deg); /* Firefox */
+    }
+    #span_onoffvideo {
+      font-size:15px; 
+      color:green;
+    }
+    #span_onoffvideo:hover {
+      font-size:25px; 
+      font-weight:bold;
+      color:red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Các tham số trong thuộc tính của thẻ là để hiển thị trên VIDEO -->
+  <div id="div_parameters_responsedata" style="display: none;" videowidth="" videoheight="" responsedata="" facebox="" facelandmark="" faceexpression="" facerecognition="" soundnotify=""></div>
+  <!-- Các tham số trong thuộc tính để lưu trữ kết quả xử lý tạm thời -->
+  <div><canvas id="canvas_videoframe" style="display: none;"/></div>
+  <div><canvas id="canvas_faceimage" style="display: none;" miliseconds="" facedescriptor="" history=""/></div>
+  <!-- ********************************************************************** -->
+  <div style="position: relative;">
+    <!-- Video from WEBCAM -->
+    <div style="position: absolute; top: 0; right: 0;">
+      <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+      <canvas id="overlay" />
+    </div>
+    <!--- ~~~~~~~~~~ --->
+    <div style="position: absolute; top: 0; right: 5px;">
+      <span id="span_onoffvideo" title="" waitingProcess=""></span>
+    </div>
+  </div>
+  <!-- ********************************************************************** -->
+</body>
+</html>

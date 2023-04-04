@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Giám sát học và thi</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      sc = "{{client_request}}"
+      sc = sc.split(';')
+      $('#client_request').get(0).innerHTML = sc[0]+"<br>"+sc[1]+"<br>"+sc[2]
+      $('#menu1').get(0).href = window.location.origin+'/capturing'
+      $('#menu2').get(0).href = window.location.origin+'/lms-testing'
+      $('#menu3').get(0).href = window.location.origin+'/lms-monitoring'
+    })
+  </script>
+</head>
+<body>
+  <h1>Nhóm nghiên cứu DeepLearning@HOU@MOET xin chào</h1>
+  <h3 id="client_request"></h3>
+  <h2>Xin chọn chức năng để thử:</h2>
+  <h3><a id="menu1" href="">1. Chụp ảnh cá nhân để nhận dạng</a></h3>
+  <h3><a id="menu2" href="">2. Giám sát khuôn mặt trên một ứng dụng</a></h3>
+  <h3><a id="menu3" href="">3. Xem kết quả giám sát nhóm người dùng</a></h3>
+</body>
+</html>

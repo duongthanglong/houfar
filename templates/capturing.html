@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Đăng ký và chụp ảnh</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='face-display.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='capturing.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      const num_students = "{{num_students}}";
+      $("#num_students").get(0).innerHTML = " - có "+num_students+" SV"
+    })
+  </script>
+  <style type="text/css">
+    td.img { border: 2px solid transparent; border-collapse: collapse; text-align: center; }
+    td.img:hover { border: 2px solid red; border-collapse: collapse; text-align: center; }
+    td.noimg { border: 2px solid transparent; border-collapse: collapse; text-align: center; }
+  </style>
+</head>
+
+<body>
+  <!-- User register or login -->
+  <table style="width: 70%;">
+    <tr>
+      <td><label>Họ và tên định danh: </label></td>
+      <td><input type="text" id="inp_username" size="30" value=""><label id="num_students"></label></td>
+      <td><button class="button" id="btn_register" onclick="register_user()">Đăng ký</button></td>
+      <td><button class="button" onclick="showHideFace()">Bật/Tắt hình ảnh</button></td>
+    </tr>
+    <tr>
+      <td><label>Mật khẩu: </label></td>
+      <td><input type="password" id="inp_password" size="15" value=""></td>
+      <td><button class="button" id="btn_login" onclick="login_user()">Đăng nhập</button></td>
+      <td><button class="button" onclick="showHidePosition()">Xem/Ẩn vị trí chụp</button></td>
+    </tr>
+    <!-- <tr>
+      <td><label>Email (để đăng ký): </label></td>
+      <td><input type="text" id="inp_email" size="30" value=""></td>
+      <td><label>Thông tin thêm: </label></td>
+      <td><input type="text" id="inp_details" size="50" value=""></td>
+    </tr> -->
+    <tr>
+      <td style="text-align: center;" colspan="4"><img id="img_position" style="display:inline;width:75%;" src="{{ url_for('static',filename='images/position_capturing.jpg') }}"></td>
+    </tr>
+  </table>
+  
+  <!-- Show captured images of user : 5x5 table with 17 images -->
+  <script>createImagesTable(userid='');</script>
+
+  <!-- The FaceModal -->
+  <script>createFaceDisplay();</script>
+  <!-- End: The FaceModal -->
+</body>
+</html>

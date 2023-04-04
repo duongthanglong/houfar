@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Giám sát học và thi</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='face-display.js') }}"></script>
+  <script type="text/javascript">
+    function showHideFace() {
+      uid = $('#username').val();
+      vw = $('#videowidth').val(), vh = $('#videoheight').val()
+      // toglleFaceDisplay( userid="", videowidth=320, videoheight=240, facebox="", facelandmark="", faceexpression="", facerecognition="", requiringcode="", soundnotify="", forceShow=false )
+      toglleFaceDisplay( uid, vw, vh, 1, 1, 1, 1, "fit@hou@moet", 1, false )
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Testing for content of LMS -->
+  <label>User ID:</label><input type="text" id="username" size="30" value="duongthanglong@hou.edu.vn">
+  <label>Video-Width:</label><input type="number" id="videowidth" size="5" value="320">
+  <label>Video-Height:</label><input type="number" id="videoheight" size="5" value="240">
+  <button onclick="showHideFace();">Bật/Tắt hình ảnh</button>
+  <div style="width:100%; height: 800px; position:relative;">
+    <iframe src="https://hou.edu.vn/" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+  <!-- End: Testing for content of LMS -->
+
+  <!-- The FaceModal -->
+  <script>createFaceDisplay();</script>
+  <!-- End: The FaceModal -->
+</body>
+</html>

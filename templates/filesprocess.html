@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Giám sát học & thi</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='face-api.js') }}"></script>
+</head>
+<body>
+  <input type="file" id="input_files" multiple/>
+  <img id="img_file" src="">
+  <textarea id="input_descriptors" style="width:700px;height:250px;"></textarea>
+  <script type="text/javascript">
+    var descriptors = '';
+    $('#input_files').on('change',function(){
+      var len=this.files.length;
+      for(var x=0;x<len;x++){
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#img_file').attr('src', e.target.result);
+          fileprocess();
+        }
+        reader.readAsDataURL(this.files[x]);
+        // console.log(this.files[x])
+      }
+    });
+    const faceModelWeights_URL = '/static/weights'
+    async function loadModels() {
+      // load face detection/landmark/expression/recognition model
+      await faceapi.nets.ssdMobilenetv1.load(faceModelWeights_URL)
+      await faceapi.loadFaceLandmarkModel(faceModelWeights_URL)
+      await faceapi.loadFaceExpressionModel(faceModelWeights_URL)
+      await faceapi.loadFaceRecognitionModel(faceModelWeights_URL)
+    }
+    $(document).ready(function() {
+      loadModels();
+      console.log(faceapi)
+    })
+    async function fileprocess(){
+      const minConf = 0.5;
+      const options = new faceapi.SsdMobilenetv1Options({ minConf });
+      const result = await faceapi
+        .detectSingleFace($('#img_file').get(0), options)
+        .withFaceLandmarks()
+        .withFaceExpressions()
+        .withFaceDescriptor();
+      if (result) {
+        sd = result.descriptor.join().split(',');
+        descriptors += (descriptors==''?'':';')+sd
+        $('#input_descriptors').get(0).innerHTML = descriptors
+      }
+    }
+  </script>
+</body>
+</html>
