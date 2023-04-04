@@ -130,7 +130,7 @@ function sendHistory(face_match) {
     face_match['sendback_allowcode'] = parameters_responsedata.responsedata.sendback_allowcode
     $.ajax({
       type: "POST",
-      url: (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+'/face-monitoring/',
+      url: (window.location.origin.includes('localhost')?window.location.origin:'https://houfar.onrender.com')+'/face-monitoring/',
       data: face_match,
       /*success: function (response) { 
         // console.log('send history:',response['results']); 
@@ -250,7 +250,7 @@ $(document).ready(function() {
   }
   
   /*Sounds for notifying*/
-  uri = (window.location.origin.includes('localhost')?window.location.origin:'https://duongthanglong.pythonanywhere.com')+'/static/sounds'
+  uri = (window.location.origin.includes('localhost')?window.location.origin:'https://houfar.onrender.com')+'/static/sounds'
   sound_absent = new Audio(uri+'/absent.mp3');
   sound_attend = new Audio(uri+'/attend.mp3');
   
