@@ -4,7 +4,7 @@ $widthoftable: 31%;
 $bgctables: #ffffff;
 $bgfontcolor: #717787;
 
-.pricingTable{
+.indexTable{
   margin: 40px auto;
 
   &>&-title{
@@ -170,7 +170,7 @@ $bgfontcolor: #717787;
         
       }
       
-      &__pricing{
+      &__description{
         font-size: 3em;
         padding: 30px 0px;
         border-bottom: 2px solid #ebedec;
