@@ -1,5 +1,5 @@
 /* CSS Document */
-body{
+html, body{
 width: 90%; /* Set a fixed width for the body element */ 
 margin: 0 auto; /* Center the body element within its parent */ 
 }
