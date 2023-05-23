@@ -2,67 +2,25 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <title>Giám sát học và thi trực tuyến</title>
+  <title>Giám sát học và thi</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       sc = "{{client_request}}"
       sc = sc.split(';')
       $('#client_request').get(0).innerHTML = sc[0]+"<br>"+sc[1]+"<br>"+sc[2]
-      $('#menu1').get(0).onclick = "window.location.href='"+window.location.origin+"'/capturing'"
-      $('#menu2').get(0).onclick = "window.location.href='"+window.location.origin+"'/monitoring'"
-      $('#menu3').get(0).onclick = "window.location.href='"+window.location.origin+"'/summarizing'"
+      $('#menu1').get(0).href = window.location.origin+'/capturing'
+      $('#menu2').get(0).href = window.location.origin+'/lms-testing'
+      $('#menu3').get(0).href = window.location.origin+'/lms-monitoring'
     })
-  </script>  
+  </script>
 </head>
-
 <body>
-  <div class="indexTable">
-    <h2 class="indexTable-title">Nhóm nghiên cứu DeepLearning @ HOU @ MOET</h2>
-    <h3 class="indexTable-subtitle" id="client_request"></h3>
-
-    <ul class="indexTable-firstTable">
-      <li class="indexTable-firstTable_table">
-        <h1 class="indexTable-firstTable_table__header">Chụp ảnh khuôn mặt cho huấn luyện mô hình</h1>
-        <p class="indexTable-firstTable_table__description"><span>@</span><span>Large</span><span>Images</span></p>
-        <ul class="indexTable-firstTable_table__options">
-          <li>Nhiều góc chụp</li>
-          <li>Màu đa dạng</li>
-          <li>Có xa/gần</li>
-        </ul>
-        <button class="indexTable-firstTable_table__getstart" id="menu1">Bắt đầu</button>
-      </li><li class="indexTable-firstTable_table">
-        <h1 class="indexTable-firstTable_table__header">Giám sát bằng hình ảnh khuôn mặt</h1>
-        <p class="indexTable-firstTable_table__description"><span>@</span><span>Free</span><span>Charge</span></p>
-        <ul class="indexTable-firstTable_table__options">
-          <input type="text" value="https://thi.hou.edu.vn" name="product" list="productName"/>
-          <datalist id="productName">
-            <option value="hou">https://hou.edu.vn</option>
-            <option value="exam">https://thi.hou.edu.vn</option>
-            <option value="oer">https://oer.hou.edu.vn</option>
-            <option value="lms">https://lms.hou.edu.vn</option>
-            <option value="hoclieu">https://hoclieu.hou.edu.vn</option>
-          </datalist>
-          <li>Kết nối độc lập</li>
-          <li>Dễ dàng thực thi</li>
-          <li>An toàn bảo mật</li>
-          <li>Hỗ trợ 24/7</li>
-        </ul>
-        <button class="indexTable-firstTable_table__getstart" id="menu2">Bắt đầu</button>
-      </li><li class="indexTable-firstTable_table">
-        <h1 class="indexTable-firstTable_table__header">Kết quả giám sát tổng hợp</h1>
-        <p class="indexTable-firstTable_table__description"><span>@</span><span>View</span><span>Summary</span></p>
-        <ul class="indexTable-firstTable_table__options">
-          <li>Hiển thị bảng</li>
-          <li>Đồ thị minh họa</li>
-          <li>Theo thời gian</li>
-        </ul>
-        <button class="indexTable-firstTable_table__getstart" id="menu3">Bắt đầu</button>
-      </li>
-    </ul>
-  </div>
-
+  <h1>Nhóm nghiên cứu DeepLearning@HOU@MOET xin chào</h1>
+  <h3 id="client_request"></h3>
+  <h2>Xin chọn chức năng để thử:</h2>
+  <h3><a id="menu1" href="">1. Chụp ảnh cá nhân để nhận dạng</a></h3>
+  <h3><a id="menu2" href="">2. Giám sát khuôn mặt trên một ứng dụng</a></h3>
+  <h3><a id="menu3" href="">3. Xem kết quả giám sát nhóm người dùng</a></h3>
 </body>
 </html>
