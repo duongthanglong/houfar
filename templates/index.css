@@ -27,7 +27,7 @@ width:500px;
 float:left;
 height:176px;
 display:inline;
-background:url(../images/top1.jpg) no-repeat;
+background:url(/static/images/top1.jpg) no-repeat;
 }
 .logo{
 float:left;
@@ -39,13 +39,13 @@ width:500px;
 float:left;
 height:176px;
 display:inline;
-background:url(../images/top2.jpg) no-repeat;
+background:url(/static/images/top2.jpg) no-repeat;
 }
 #menu{
 width:1000px;
 float:left;
 height:56px;
-background:url(../images/menu.jpg) no-repeat;
+background:url(/static/images/menu.jpg) no-repeat;
 }
 .men_tp{
 width:855px;
@@ -76,7 +76,7 @@ width:865px;
 float:left;
 margin-top:10px;
 padding-bottom:15px;
-background:#ECF6F9 url(../images/img_bt.gif) no-repeat bottom;
+background:#ECF6F9 url(/static/images/img_bt.gif) no-repeat bottom;
 }
 .img_txt{
 float:left;
@@ -86,13 +86,13 @@ margin:-10px 0px 0px 10px;
 .img_tp{
 width:865px;
 float:left;
-background:url(../images/img_tp.gif) no-repeat;
+background:url(/static/images/img_tp.gif) no-repeat;
 height:15px;
 }
 #con{
 width:865px;
 float:left;
-background:url(../images/part_bg.gif) repeat-y;
+background:url(/static/images/part_bg.gif) repeat-y;
 }
 .con1{
 width:560px;
@@ -192,7 +192,7 @@ padding:10px 0px 0px 15px;
 #link a{
 float:left;
 width:257px;
-background:url(../images/arr.gif) no-repeat left;
+background:url(/static/images/arr.gif) no-repeat left;
 padding-left:15px;
 margin-top:7px;
 color:#FFF;
@@ -204,7 +204,7 @@ font:12px/18px georgia;
 width:1000px;
 float:left;
 padding-bottom:30px;
-background:url(../images/ft_bg.gif) repeat-x;
+background:url(/static/images/ft_bg.gif) repeat-x;
 }
 #foot{
 width:800px;
