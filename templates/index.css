@@ -1,7 +1,8 @@
 /* CSS Document */
 body{
+width: 100%; /* Set a fixed width for the body element */ 
 padding:0px;
-margin:0px;
+margin: 0 auto; /* Center the body element within its parent */ 
 }
 img{
 border:0px;
